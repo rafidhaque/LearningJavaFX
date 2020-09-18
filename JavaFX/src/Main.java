@@ -9,8 +9,8 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application  {
-    // Confirmation Box
-    // Different Stage/windows will interact
+    // Properly Close Application??
+    // Save the state first.
 
 
     Stage window;
@@ -26,16 +26,29 @@ public class Main extends Application  {
         window = primaryStage;
         window.setTitle("hello");
 
-        button = new Button("Click");
-        button.setOnAction(event -> {
-            boolean result = ConfirmBox.display("Naked Pix", "Are you sure?");
-            System.out.println(result);
+        window.setOnCloseRequest(event -> {
+            event.consume(); // we're gonna take care of it. 
+            closeProgram();
         });
+
+        button = new Button("Click");
+        button.setOnAction(event -> closeProgram());
+
         StackPane layout = new StackPane();
         layout.getChildren().add(button);
         Scene scene = new Scene(layout, 200, 200);
         window.setScene(scene);
         window.show();
+    }
+
+    void closeProgram() {
+//        System.out.println("File is Saved"); // haha!
+//        window.close();
+
+        Boolean answer = ConfirmBox.display("Title", "Sure???");
+        if (answer == true) {
+            window.close();
+        }
     }
 
 }
