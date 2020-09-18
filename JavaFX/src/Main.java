@@ -9,7 +9,8 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application  {
-    // Alert box
+    // Confirmation Box
+    // Different Stage/windows will interact
 
 
     Stage window;
@@ -26,8 +27,10 @@ public class Main extends Application  {
         window.setTitle("hello");
 
         button = new Button("Click");
-        button.setOnAction(event -> AlertBox.display("New Window", "I love Allah!"));
-
+        button.setOnAction(event -> {
+            boolean result = ConfirmBox.display("Naked Pix", "Are you sure?");
+            System.out.println(result);
+        });
         StackPane layout = new StackPane();
         layout.getChildren().add(button);
         Scene scene = new Scene(layout, 200, 200);
