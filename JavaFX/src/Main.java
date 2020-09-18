@@ -2,6 +2,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -9,13 +11,11 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application  {
-    // Properly Close Application??
-    // Save the state first.
+    // Embedding Layouts
+    // Using BorderPane
 
 
     Stage window;
-    Button button;
-
 
     public static void main(String[] args) {
         launch(args);
@@ -26,29 +26,25 @@ public class Main extends Application  {
         window = primaryStage;
         window.setTitle("hello");
 
-        window.setOnCloseRequest(event -> {
-            event.consume(); // we're gonna take care of it. 
-            closeProgram();
-        });
+        HBox hBox = new HBox();
+        Button button1 = new Button("File");
+        Button button2 = new Button("Edit");
+        Button button3 = new Button("View");
+        hBox.getChildren().addAll(button1, button2, button3);
 
-        button = new Button("Click");
-        button.setOnAction(event -> closeProgram());
+        VBox vBox = new VBox();
+        Button buttonA = new Button("A");
+        Button buttonB = new Button("B");
+        Button buttonC = new Button("C");
+        vBox.getChildren().addAll(buttonA, buttonB, buttonC);
 
-        StackPane layout = new StackPane();
-        layout.getChildren().add(button);
-        Scene scene = new Scene(layout, 200, 200);
+        BorderPane layout = new BorderPane();
+        layout.setTop(hBox);
+        layout.setLeft(vBox);
+
+        Scene scene = new Scene(layout, 400, 400);
         window.setScene(scene);
         window.show();
-    }
-
-    void closeProgram() {
-//        System.out.println("File is Saved"); // haha!
-//        window.close();
-
-        Boolean answer = ConfirmBox.display("Title", "Sure???");
-        if (answer == true) {
-            window.close();
-        }
     }
 
 }
