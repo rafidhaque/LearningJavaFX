@@ -7,7 +7,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 
-public class Main extends Application implements EventHandler<ActionEvent> {
+public class Main extends Application  {
 
     Button button;
 
@@ -23,7 +23,12 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         primaryStage.setTitle("Title of my name");
         button = new Button("Click me man");
 
-        button.setOnAction(this); // "this" here, is a class where the handle() method for the button is located.
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("I am an anonymous inner class");
+            }
+        }); // Can also use anonymous inner class... could use the before one with swing??
 
 
         // layout: how everything is staged.
@@ -33,13 +38,5 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         Scene scene = new Scene(layout, 300, 250);
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-
-
-    @Override
-    public void handle(ActionEvent event) {
-        if (event.getSource() == button) {// which object or button caused (pressed)
-            System.out.printf("I love it");
-        }
     }
 }
