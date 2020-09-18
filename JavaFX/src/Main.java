@@ -23,12 +23,7 @@ public class Main extends Application  {
         primaryStage.setTitle("Title of my name");
         button = new Button("Click me man");
 
-        button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("I am an anonymous inner class");
-            }
-        }); // Can also use anonymous inner class... could use the before one with swing??
+        button.setOnAction(e -> printer()); // also can use lambda expression.
 
 
         // layout: how everything is staged.
@@ -39,4 +34,9 @@ public class Main extends Application  {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
+    public void printer() {
+        System.out.println("hello from");
+    }
+
 }
